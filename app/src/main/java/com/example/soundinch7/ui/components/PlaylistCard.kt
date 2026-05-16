@@ -2,7 +2,7 @@ package com.example.soundinch7.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -30,12 +30,19 @@ import com.example.soundinch7.ui.theme.SoundInch7Theme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun PlaylistCard( playlist: Playlist, onClick: () -> Unit){
+fun PlaylistCard(
+    playlist: Playlist,
+    onClick: () -> Unit,
+    onLongClick: () -> Unit = {}
+){
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(1f) // this make the card square
-            .clickable(onClick = onClick),
+            .combinedClickable(
+                onClick = onClick,
+                onLongClick = onLongClick
+            ),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
@@ -89,7 +96,6 @@ fun PlaylistCardPreview() {
         }
     }
 }
-
 
 
 
